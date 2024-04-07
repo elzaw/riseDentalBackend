@@ -1,7 +1,8 @@
 const { Patient } = require("../models/patientModel");
+const asyncHandler = require("express-async-handler");
 
 // Create (Insert) Operation
-const createPatient = async (req, res) => {
+const createPatient = asyncHandler(async (req, res) => {
   try {
     const patientData = req.body;
     const newPatient = await Patient.create(patientData);
@@ -9,7 +10,7 @@ const createPatient = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Could not create patient", details: error });
   }
-};
+});
 
 // Read (Retrieve) Operation
 const getAllPatients = async (req, res) => {
