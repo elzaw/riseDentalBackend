@@ -1,0 +1,76 @@
+const { Patient } = require("../models/patientModel");
+
+// Create (Insert) Operation
+const createPatient = async (req, res) => {
+  try {
+    const patientData = req.body;
+    const newPatient = new Patient(patientData);
+    const savedPatient = await newPatient.save();
+    res.status(201).json(savedPatient);
+  } catch (error) {
+    res.status(500).json({ error: "Could not create patient", details: error });
+  }
+};
+
+// Read (Retrieve) Operation
+const getAllPatients = async (req, res) => {
+  try {
+    const patients = await Patient.find();
+    res.json(patients);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Could not retrieve patients", details: error });
+  }
+};
+
+// Read (Retrieve) Operation - Get patient by ID
+const getPatientById = async (req, res) => {
+  try {
+    const patientId = req.params.id;
+    const patient = await Patient.findById(patientId);
+    if (!patient) {
+      return res.status(404).json({ error: "Patient not found" });
+    }
+    res.json(patient);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Could not retrieve patient", details: error });
+  }
+};
+
+// Update Operation
+const updatePatient = async (req, res) => {
+  try {
+    const patientId = req.params.id;
+    const updateData = req.body;
+    const updatedPatient = await Patient.findByIdAndUpdate(
+      patientId,
+      updateData,
+      { new: true }
+    );
+    res.json(updatedPatient);
+  } catch (error) {
+    res.status(500).json({ error: "Could not update patient", details: error });
+  }
+};
+
+// Delete Operation
+const deletePatient = async (req, res) => {
+  try {
+    const patientId = req.params.id;
+    const deletedPatient = await Patient.findByIdAndDelete(patientId);
+    res.json(deletedPatient);
+  } catch (error) {
+    res.status(500).json({ error: "Could not delete patient", details: error });
+  }
+};
+
+module.exports = {
+  createPatient,
+  getAllPatients,
+  updatePatient,
+  deletePatient,
+  getPatientById,
+};
