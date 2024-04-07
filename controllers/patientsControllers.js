@@ -13,7 +13,7 @@ const createPatient = asyncHandler(async (req, res) => {
 });
 
 // Read (Retrieve) Operation
-const getAllPatients = async (req, res) => {
+const getAllPatients = asyncHandler(async (req, res) => {
   try {
     const patients = await Patient.find();
     res.json(patients);
@@ -22,10 +22,10 @@ const getAllPatients = async (req, res) => {
       .status(500)
       .json({ error: "Could not retrieve patients", details: error });
   }
-};
+});
 
 // Read (Retrieve) Operation - Get patient by ID
-const getPatientById = async (req, res) => {
+const getPatientById = asyncHandler(async (req, res) => {
   try {
     const patientId = req.params.id;
     const patient = await Patient.findById(patientId);
@@ -38,10 +38,10 @@ const getPatientById = async (req, res) => {
       .status(500)
       .json({ error: "Could not retrieve patient", details: error });
   }
-};
+});
 
 // Update Operation
-const updatePatient = async (req, res) => {
+const updatePatient = asyncHandler(async (req, res) => {
   try {
     const patientId = req.params.id;
     const updateData = req.body;
@@ -57,10 +57,10 @@ const updatePatient = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Could not update patient", details: error });
   }
-};
+});
 
 // Delete Operation
-const deletePatient = async (req, res) => {
+const deletePatient = asyncHandler(async (req, res) => {
   try {
     const patientId = req.params.id;
     const deletedPatient = await Patient.findByIdAndDelete(patientId);
@@ -71,7 +71,7 @@ const deletePatient = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Could not delete patient", details: error });
   }
-};
+});
 
 module.exports = {
   createPatient,
