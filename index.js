@@ -26,5 +26,7 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Rise Dental app listening on port ${port}!`);
+  console.log(
+    `Rise Dental app listening in ${process.env.NODE_ENV} on port ${port}!`
+  );
 });
