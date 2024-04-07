@@ -4,9 +4,8 @@ const { Patient } = require("../models/patientModel");
 const createPatient = async (req, res) => {
   try {
     const patientData = req.body;
-    const newPatient = new Patient(patientData);
-    const savedPatient = await newPatient.save();
-    res.status(201).json(savedPatient);
+    const newPatient = await Patient.create(patientData);
+    res.status(201).json(newPatient);
   } catch (error) {
     res.status(500).json({ error: "Could not create patient", details: error });
   }
@@ -50,6 +49,9 @@ const updatePatient = async (req, res) => {
       updateData,
       { new: true }
     );
+    if (!updatedPatient) {
+      return res.status(404).json({ error: "Patient not found" });
+    }
     res.json(updatedPatient);
   } catch (error) {
     res.status(500).json({ error: "Could not update patient", details: error });
@@ -61,6 +63,9 @@ const deletePatient = async (req, res) => {
   try {
     const patientId = req.params.id;
     const deletedPatient = await Patient.findByIdAndDelete(patientId);
+    if (!deletedPatient) {
+      return res.status(404).json({ error: "Patient not found" });
+    }
     res.json(deletedPatient);
   } catch (error) {
     res.status(500).json({ error: "Could not delete patient", details: error });
