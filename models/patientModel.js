@@ -15,7 +15,7 @@ const patientSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    cost: {
+    examinationFee: {
       type: Number,
       required: true,
     },
@@ -23,7 +23,7 @@ const patientSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    rest: {
+    remaining: {
       type: Number,
       required: true,
     },
