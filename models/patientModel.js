@@ -15,38 +15,6 @@ const patientSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    examinationFee: {
-      type: Number,
-      required: true,
-    },
-    paid: {
-      type: Number,
-      required: true,
-    },
-    remaining: {
-      type: Number,
-      required: true,
-    },
-    action: {
-      type: String,
-      enum: ["حشو عصب", "حشو عادي", "ضرس أمامي", "ضرس خلفي"],
-      required: true,
-    },
-    visits: {
-      type: [
-        {
-          date: { type: Date, required: true },
-          description: { type: String, required: true },
-        },
-      ],
-      required: true,
-    },
-    notes: [
-      {
-        date: { type: Date, required: true },
-        description: { type: String, required: true },
-      },
-    ],
   },
   { collection: "Patient" }
 );

@@ -6,6 +6,7 @@ const port = process.env.PORT || 3000;
 const dotenv = require("dotenv");
 dotenv.config();
 const patientsRoutes = require("./routes/patientsRoutes");
+const examinationsRoutes = require("./routes/examinationsRoutes");
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -20,6 +21,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/patients", patientsRoutes);
+app.use("/examinations", examinationsRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
