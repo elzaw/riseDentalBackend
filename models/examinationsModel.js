@@ -27,6 +27,7 @@ const examinationsSchema = new mongoose.Schema(
 
     notes: { type: String, required: true },
     date: { type: Date, required: true },
+    nextVisit: { type: Date, required: true },
   },
   { collection: "Examinations" }
 );
