@@ -24,7 +24,6 @@ const examinationsSchema = new mongoose.Schema(
       enum: ["حشو عصب", "حشو عادي", "ضرس أمامي", "ضرس خلفي"],
       required: true,
     },
-
     notes: { type: String, required: true },
     date: { type: Date, required: true },
     nextVisit: { type: Date, required: true },
