@@ -61,10 +61,20 @@ const deleteExamination = asyncHandler(async (req, res) => {
   }
 });
 
+const getExaminationsByPatientId = asyncHandler(async (req, res) => {
+  const patientId = req.params.id;
+  try {
+    const examinations = await Examinations.find({ patient: patientId });
+    res.status(200).json(examinations);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 module.exports = {
   createExamination,
   getAllExaminations,
   getExaminationById,
   updateExamination,
   deleteExamination,
+  getExaminationsByPatientId,
 };

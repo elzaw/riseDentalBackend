@@ -7,9 +7,12 @@ const {
   getExaminationById,
   updateExamination,
   deleteExamination,
+  getExaminationsByPatientId,
 } = require("../controllers/examinationsController");
 
 router.route("/").get(getAllExaminations).post(createExamination);
+
+router.route("/patient/:id").get(getExaminationsByPatientId);
 
 router
   .route("/:id")
