@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const patientsRoutes = require("./routes/patientsRoutes");
 const examinationsRoutes = require("./routes/examinationsRoutes");
+const doctorsRoutes = require("./routes/doctorsRoutes");
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -22,6 +23,7 @@ app.use(express.json());
 
 app.use("/patients", patientsRoutes);
 app.use("/examinations", examinationsRoutes);
+app.use("/doctors", doctorsRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
